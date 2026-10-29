@@ -83,7 +83,7 @@ body {
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   z-index: 100; cursor: pointer; padding: 40px;
 }
-.overlay h1 { font-size: 38px; color: #FFD700; line-height: 1.7; text-align: center; max-width: 1000px; }
+.overlay h1 { font-size: 58px; color: #FFD700; line-height: 1.6; text-align: center; max-width: 1300px; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
 .overlay h2 { font-size: 44px; color: #FFD700; margin-bottom: 40px; }
 .overlay .sub { font-size: 24px; opacity: 0.85; margin-top: 20px; }
 .overlay .rules-box {
@@ -135,7 +135,7 @@ body {
 <body>
 
 <div class="overlay" id="titleOverlay">
-  <h1>2026年矿业与机械工程学院<br>"铭记历史·砥砺前行"<br>纪念红军长征胜利90周年<br>党史暨三线精神知识竞赛主题党日活动</h1>
+  <h1>2026年矿业与机械工程学院<br>学生党支部"铭记历史·砥砺前行"<br>纪念红军长征胜利90周年<br>党史暨三线精神知识竞赛主题党日活动</h1>
   <p class="sub">共 350 题</p>
   <p class="sub" style="margin-top:30px;">点击任意处继续</p>
 </div>
@@ -197,7 +197,8 @@ body {
     <button class="ctrl-btn" id="timerBtn" onclick="toggleTimer()" style="background:#FFD700; color:#8B0000; border-color:#FFD700; font-weight:bold;">开始</button>
   </div>
 </div>
-<div id="timerDisplay" style="display:none; position:fixed; top:80px; left:50%; transform:translateX(-50%); font-size:80px; font-weight:bold; color:#FFD700; text-shadow:0 0 30px rgba(255,215,0,0.8); z-index:80;"></div>
+<div id="timerDisplay" style="display:none; position:fixed; top:140px; right:30px; font-size:72px; font-weight:bold; color:#FFD700; text-shadow:0 0 20px rgba(255,215,0,0.8); z-index:80;"></div>
+<div id="focusType" style="display:none; position:fixed; top:20px; left:30px; z-index:70; padding:8px 22px; border-radius:20px; background:rgba(0,0,0,0.45); border:1px solid #FFD700; color:#FFD700; font-size:20px; font-weight:bold;"></div>
 <div class="footer-hint">空格 = 显示答案/下一题 | ← → = 前后翻页 | R = 随机抽题 | M = 音乐开关 | Home/End = 首题/末题</div>
 
 <audio id="intro" preload="auto" src="intro.mp3"></audio>
@@ -314,6 +315,7 @@ function zoomFont(d) {
 function render() {
   const q = QS[idx];
   document.getElementById('typeBadge').textContent = q.type_label;
+  document.getElementById('focusType').textContent = q.type_label;
   document.getElementById('progress').textContent = (idx+1) + ' / ' + QS.length;
   document.getElementById('fill').style.width = ((idx+1)/QS.length*100) + '%';
   document.getElementById('section').textContent = q.section;
@@ -432,6 +434,8 @@ function toggleFocus() {
   });
   // 专注模式下题目区域上移
   document.querySelector('.main').style.padding = focusMode ? '80px 80px 60px' : '50px 80px 140px';
+  // 专注模式下保留题型角标
+  document.getElementById('focusType').style.display = focusMode ? 'block' : 'none';
 }
 
 // 倒计时
